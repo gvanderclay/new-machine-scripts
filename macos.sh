@@ -44,6 +44,7 @@ defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
 
 # Show 24 hour time
 defaults write "Apple Global Domain" AppleICUForce24HourTime 1
+defaults write "Apple Global Domain" com.apple.keyboard.fnState 1
 
 for app in "Activity Monitor" \
 	"Address Book" \
