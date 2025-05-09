@@ -2,6 +2,12 @@ export NONINTERACTIVE=1
 
 # set -v
 
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # Homebrew
 if ! brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -11,6 +17,13 @@ if ! brew; then
 fi
 
 brew bundle install
+
+# Check to see if oh-my-zsh is installed
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+	echo "Oh My Zsh is already installed."
+fi
 
 # Commands for vs code vim
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false # For VSCode Vim
